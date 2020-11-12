@@ -2,36 +2,37 @@ package vehicle;
 
 import java.text.DecimalFormat;
 
-public class Truck extends Vehicle{
+public class Bus extends Vehicle {
 
-    public Truck(double fuelQuantity, double consumption, double tankCapacity) {
-        super(fuelQuantity, consumption + 1.6, tankCapacity);
+    public Bus (double fuelQuantity, double consumption, double tankCapacity) {
+        super(fuelQuantity, consumption, tankCapacity);
     }
 
     @Override
-    protected void driving(double distance) {
+    public void driving(double distance) {
         double neededLitersForCurrentDistance = (super.getConsumption() * distance);
 
         if (neededLitersForCurrentDistance > super.getFuelQuantity()) {
-            System.out.println("Truck needs refueling");
+            System.out.println("Bus needs refueling");
             return;
         }
 
         super.setFuelQuantity(super.getFuelQuantity() - neededLitersForCurrentDistance);
+
         DecimalFormat df = new DecimalFormat("0.##");
-        System.out.println("Truck travelled " + df.format(distance) + " km");
+        System.out.println("Bus travelled " + df.format(distance) +" km");
     }
 
     @Override
-    protected void refueling(double liters) {
+    public void refueling(double liters) {
         double currentQuantity = super.getFuelQuantity();
-        double newQuantity = currentQuantity + (liters * 0.95);
+        double newQuantity = currentQuantity + liters;
 
         super.setFuelQuantity(newQuantity);
     }
 
     @Override
     public String toString() {
-        return String.format("Truck: %.2f", super.getFuelQuantity());
+        return String.format("Bus: %.2f", super.getFuelQuantity());
     }
 }

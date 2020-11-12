@@ -2,10 +2,10 @@ package vehicle;
 
 import java.text.DecimalFormat;
 
-public class Car extends Vehicle{
+public class Car extends Vehicle {
 
-    public Car(double fuelQuantity, double consumption) {
-        super(fuelQuantity, consumption + 0.9);
+    public Car(double fuelQuantity, double consumption, double tankCapacity) {
+        super(fuelQuantity, consumption + 0.9, tankCapacity);
     }
 
     @Override
@@ -25,8 +25,13 @@ public class Car extends Vehicle{
 
     @Override
     public void refueling(double liters) {
+        if (liters <= 0) {
+            super.setFuelQuantity(liters);
+        }
         double currentQuantity = super.getFuelQuantity();
         double newQuantity = currentQuantity + liters;
+
+
 
         super.setFuelQuantity(newQuantity);
     }

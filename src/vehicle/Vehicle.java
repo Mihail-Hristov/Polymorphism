@@ -1,12 +1,14 @@
 package vehicle;
 
 public abstract class Vehicle {
-    protected double fuelQuantity;
-    protected double consumption;
+    private double fuelQuantity;
+    private double consumption;
+    private double tankCapacity;
 
-    public Vehicle(double fuelQuantity, double consumption) {
-        this.fuelQuantity = fuelQuantity;
+    public Vehicle(double fuelQuantity, double consumption, double tankCapacity) {
+        this.setFuelQuantity(fuelQuantity);
         this.consumption = consumption;
+        this.tankCapacity = tankCapacity;
     }
 
     public double getFuelQuantity() {
@@ -14,6 +16,10 @@ public abstract class Vehicle {
     }
 
     protected void setFuelQuantity(double fuelQuantity) {
+        if (fuelQuantity <= 0) {
+            throw new IllegalArgumentException("Fuel must be a positive number");
+        }
+
         this.fuelQuantity = fuelQuantity;
     }
 
