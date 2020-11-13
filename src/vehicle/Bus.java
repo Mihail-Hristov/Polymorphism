@@ -36,7 +36,15 @@ public class Bus extends Vehicle {
 
     @Override
     public void refueling(double liters) {
-        super.setFuelQuantity(liters);
+        if (liters < 0) {
+            super.setFuelQuantity(liters);
+        }
+        double newQuantity = super.getFuelQuantity() + liters;
+        if (newQuantity > super.getTankCapacity()) {
+            throw new IllegalStateException("Cannot fit fuel in tank");
+        }
+
+        super.setFuelQuantity(newQuantity);
     }
 
     @Override
