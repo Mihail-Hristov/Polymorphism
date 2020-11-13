@@ -25,15 +25,7 @@ public class Car extends Vehicle {
 
     @Override
     public void refueling(double liters) {
-        if (liters <= 0) {
-            super.setFuelQuantity(liters);
-        }
-        double currentQuantity = super.getFuelQuantity();
-        double newQuantity = currentQuantity + liters;
-
-
-
-        super.setFuelQuantity(newQuantity);
+        super.setFuelQuantity(liters);
     }
 
     @Override

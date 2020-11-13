@@ -9,7 +9,7 @@ public class Truck extends Vehicle{
     }
 
     @Override
-    protected void driving(double distance) {
+    public void driving(double distance) {
         double neededLitersForCurrentDistance = (super.getConsumption() * distance);
 
         if (neededLitersForCurrentDistance > super.getFuelQuantity()) {
@@ -18,16 +18,14 @@ public class Truck extends Vehicle{
         }
 
         super.setFuelQuantity(super.getFuelQuantity() - neededLitersForCurrentDistance);
+
         DecimalFormat df = new DecimalFormat("0.##");
         System.out.println("Truck travelled " + df.format(distance) + " km");
     }
 
     @Override
-    protected void refueling(double liters) {
-        double currentQuantity = super.getFuelQuantity();
-        double newQuantity = currentQuantity + (liters * 0.95);
-
-        super.setFuelQuantity(newQuantity);
+    public void refueling(double liters) {
+        super.setFuelQuantity(liters * 0.95);
     }
 
     @Override

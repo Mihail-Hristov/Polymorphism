@@ -3,7 +3,7 @@ package vehicle;
 public abstract class Vehicle {
     private double fuelQuantity;
     private double consumption;
-    private double tankCapacity;
+    private final double tankCapacity;
 
     public Vehicle(double fuelQuantity, double consumption, double tankCapacity) {
         this.setFuelQuantity(fuelQuantity);
@@ -20,6 +20,13 @@ public abstract class Vehicle {
             throw new IllegalArgumentException("Fuel must be a positive number");
         }
 
+        if (this.getFuelQuantity() + fuelQuantity > this.tankCapacity && this.tankCapacity != 0.0) {
+            throw new IllegalStateException("Cannot fit fuel in tank");
+        }else{
+            fuelQuantity -= this.fuelQuantity;
+
+        }
+
         this.fuelQuantity = fuelQuantity;
     }
 
@@ -31,7 +38,11 @@ public abstract class Vehicle {
         this.consumption = consumption;
     }
 
+    public double getTankCapacity() {
+        return this.tankCapacity;
+    }
 
-    protected abstract void driving(double distance);
-    protected abstract void refueling(double liters);
+
+    public abstract void driving(double distance);
+    public abstract void refueling(double liters);
 }
