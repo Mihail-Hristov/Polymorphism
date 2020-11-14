@@ -1,40 +1,12 @@
 package vehicle;
 
-import java.text.DecimalFormat;
-
 public class Car extends Vehicle {
+    private static final double AIR_CONSUMPTION_EXTEND = 0.9;
 
     public Car(double fuelQuantity, double consumption, double tankCapacity) {
-        super(fuelQuantity, consumption + 0.9, tankCapacity);
+        super(fuelQuantity, consumption + AIR_CONSUMPTION_EXTEND, tankCapacity);
     }
 
-    @Override
-    public void driving(double distance) {
-        double neededLitersForCurrentDistance = (super.getConsumption() * distance);
-
-        if (neededLitersForCurrentDistance > super.getFuelQuantity()) {
-            System.out.println("Car needs refueling");
-            return;
-        }
-
-        super.setFuelQuantity(super.getFuelQuantity() - neededLitersForCurrentDistance);
-
-        DecimalFormat df = new DecimalFormat("0.##");
-        System.out.println("Car travelled " + df.format(distance) +" km");
-    }
-
-    @Override
-    public void refueling(double liters) {
-        if (liters < 0) {
-            super.setFuelQuantity(liters);
-        }
-        double newQuantity = super.getFuelQuantity() + liters;
-        if (newQuantity > super.getTankCapacity()) {
-            throw new IllegalStateException("Cannot fit fuel in tank");
-        }
-
-        super.setFuelQuantity(newQuantity);
-    }
 
     @Override
     public String toString() {

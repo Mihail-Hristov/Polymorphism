@@ -1,13 +1,6 @@
 package vehicle;
 
-import animals.Cat;
-import vehicle.Bus;
-import vehicle.Car;
-import vehicle.Truck;
-import vehicle.Vehicle;
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
@@ -59,11 +52,11 @@ public class Main {
             case "Drive":
                 double distance = Double.parseDouble(tokens[2]);
                 if (vehicleType.equals("Car")) {
-                    car.driving(distance);
+                    System.out.println(car.driving(distance));
                 } else if (vehicleType.equals("Truck")) {
-                    truck.driving(distance);
+                    System.out.println(truck.driving(distance));
                 } else if (vehicleType.equals("Bus")) {
-                    bus.driving(distance);
+                    System.out.println(bus.driving(distance));
                 }
                 break;
             case "Refuel":

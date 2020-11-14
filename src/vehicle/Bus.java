@@ -1,51 +1,18 @@
 package vehicle;
 
-import java.text.DecimalFormat;
-
 public class Bus extends Vehicle {
-    private boolean airConditionerIsOn = true;
+    private static final double AIR_CONSUMPTION_EXTEND = 1.4;
 
     public Bus (double fuelQuantity, double consumption, double tankCapacity) {
-        super(fuelQuantity, consumption + 1.4, tankCapacity);
-    }
-
-    @Override
-    public void driving(double distance) {
-        double currentConsumption = super.getConsumption();
-        if (!this.airConditionerIsOn) {
-            currentConsumption -= 1.4;
-        }
-        double neededLitersForCurrentDistance = (currentConsumption * distance);
-
-        if (neededLitersForCurrentDistance > super.getFuelQuantity()) {
-            System.out.println("Bus needs refueling");
-            return;
-        }
-
-        super.setFuelQuantity(super.getFuelQuantity() - neededLitersForCurrentDistance);
-
-        DecimalFormat df = new DecimalFormat("0.##");
-        System.out.println("Bus travelled " + df.format(distance) +" km");
+        super(fuelQuantity, consumption + AIR_CONSUMPTION_EXTEND, tankCapacity);
     }
 
     public void drivingEmptyBus(double distance) {
-        this.airConditionerIsOn = false;
-        driving(distance);
-        this.airConditionerIsOn = true;
+        super.setConsumption(getConsumption() - AIR_CONSUMPTION_EXTEND);
+        System.out.println(driving(distance));
+        super.setConsumption(getConsumption() + AIR_CONSUMPTION_EXTEND);
     }
 
-    @Override
-    public void refueling(double liters) {
-        if (liters < 0) {
-            super.setFuelQuantity(liters);
-        }
-        double newQuantity = super.getFuelQuantity() + liters;
-        if (newQuantity > super.getTankCapacity()) {
-            throw new IllegalStateException("Cannot fit fuel in tank");
-        }
-
-        super.setFuelQuantity(newQuantity);
-    }
 
     @Override
     public String toString() {
