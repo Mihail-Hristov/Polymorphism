@@ -15,10 +15,9 @@ public class Zebra extends Mammal{
 
     @Override
     public void eat(Food food) {
-        String[] tokens= (food.getClass().getName().split("\\."));
-        String className = tokens[1];
+        String className = food.getClass().getSimpleName();
         if (className.equals("Meat")) {
-            throw new IllegalStateException(String.format("%ss are not eating that type of food!", this.getAnimalType()));
+            throw new IllegalStateException(String.format("Zebras are not eating that type of food!"));
         }
 
         this.setFoodEaten(food.getQuantity());

@@ -6,6 +6,7 @@ public abstract class Animal {
     private String animalType;
     private Double animalWeight;
     private int foodEaten;
+
     protected Animal(String animalName, String animalType, Double animalWeight) {
         this.animalName = animalName;
         this.animalType = animalType;

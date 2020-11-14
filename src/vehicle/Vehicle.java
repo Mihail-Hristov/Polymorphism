@@ -14,14 +14,6 @@ public class Vehicle {
         this.consumption = consumption;
     }
 
-    public void setConsumption(double consumption) {
-        this.consumption = consumption;
-    }
-
-    public double getConsumption() {
-        return this.consumption;
-    }
-
     public double getFuelQuantity() {
         return this.fuelQuantity;
     }

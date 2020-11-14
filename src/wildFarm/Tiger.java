@@ -16,10 +16,9 @@ public class Tiger extends Felime{
 
     @Override
     public void eat(Food food) {
-        String[] tokens= (food.getClass().getName().split("\\."));
-        String className = tokens[1];
+        String className = food.getClass().getSimpleName();
         if (className.equals("Vegetable")) {
-            throw new IllegalStateException(String.format("%ss are not eating that type of food!", this.getAnimalType()));
+            throw new IllegalStateException(String.format("Tigers are not eating that type of food!"));
         }
 
         this.setFoodEaten(food.getQuantity());

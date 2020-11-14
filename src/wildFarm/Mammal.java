@@ -12,6 +12,4 @@ public abstract class Mammal extends Animal{
         return this.livingRegion;
     }
 
-    public abstract void makeSound();
-    public abstract void eat(Food food);
 }

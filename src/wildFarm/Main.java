@@ -70,21 +70,11 @@ public class Main {
     }
 
     public static Food createFood(String[] tokens) {
-        Food food = null;
         String foodType = tokens[0];
         int quantity = Integer.parseInt(tokens[1]);
 
-        switch (foodType) {
-            case "Vegetable":
-                food = new Vegetable(quantity);
-
-                break;
-            case "Meat":
-                food = new Meat(quantity);
-
-                break;
-        }
-
-        return food;
+        return foodType.equals("Meat")
+                ? new Meat(quantity)
+                : new Vegetable(quantity);
     }
 }
