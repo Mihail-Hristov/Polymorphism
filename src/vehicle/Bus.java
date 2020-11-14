@@ -7,10 +7,9 @@ public class Bus extends Vehicle {
         super(fuelQuantity, consumption + AIR_CONSUMPTION_EXTEND, tankCapacity);
     }
 
-    public void drivingEmptyBus(double distance) {
-        super.setConsumption(getConsumption() - AIR_CONSUMPTION_EXTEND);
-        System.out.println(driving(distance));
-        super.setConsumption(getConsumption() + AIR_CONSUMPTION_EXTEND);
+    public String drivingEmptyBus(double distance) {
+
+        return super.doWithLowerConsumption(AIR_CONSUMPTION_EXTEND, () -> super.driving(distance));
     }
 
 }

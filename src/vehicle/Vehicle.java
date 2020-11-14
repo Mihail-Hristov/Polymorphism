@@ -1,6 +1,7 @@
 package vehicle;
 
 import java.text.DecimalFormat;
+import java.util.function.Supplier;
 
 public class Vehicle {
     private double fuelQuantity;
@@ -23,6 +24,18 @@ public class Vehicle {
 
     public double getFuelQuantity() {
         return this.fuelQuantity;
+    }
+
+    protected <T> T doWithLowerConsumption(double additionalConsumption, Supplier<T> supplier) {
+
+        this.consumption -= additionalConsumption;
+        try {
+            return supplier.get();
+        } catch (Exception exception) {
+            throw new IllegalStateException(exception);
+        } finally {
+            this.consumption += additionalConsumption;
+        }
     }
 
     protected void setFuelQuantity(double fuelQuantity) {

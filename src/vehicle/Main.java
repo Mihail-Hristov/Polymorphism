@@ -2,10 +2,14 @@ package vehicle;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        Map<String, Vehicle> vehicleMap = new LinkedHashMap<>();
 
         String[] carTokens = readTokens(reader);
         String[] truckTokens = readTokens(reader);
@@ -22,56 +26,50 @@ public class Main {
             System.out.println(ex.getMessage());
         }
 
+        vehicleMap.put("Car", car);
+        vehicleMap.put("Truck", truck);
+        vehicleMap.put("Bus", bus);
+
         int numberOfCommands = Integer.parseInt(reader.readLine());
 
         for (int i = 0; i < numberOfCommands; i++) {
             String[] tokens = reader.readLine().split("\\s+");
 
             try {
-                doTheCommand(tokens, car, truck, bus);
+                doTheCommand(tokens, vehicleMap);
             }catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
         }
 
-        System.out.println(car);
-        System.out.println(truck);
-        System.out.println(bus);
-
+        for (Vehicle vehicle : vehicleMap.values()) {
+            System.out.println(vehicle);
+        }
     }
 
     public static String[] readTokens (BufferedReader reader) throws Exception {
         return reader.readLine().split("\\s+");
     }
 
-    public static void doTheCommand(String[] tokens, Car car, Truck truck, Bus bus) {
+    public static void doTheCommand(String[] tokens, Map<String, Vehicle> vehicleMap) {
         String command = tokens[0];
         String vehicleType = tokens[1];
 
         switch (command) {
             case "Drive":
                 double distance = Double.parseDouble(tokens[2]);
-                if (vehicleType.equals("Car")) {
-                    System.out.println(car.driving(distance));
-                } else if (vehicleType.equals("Truck")) {
-                    System.out.println(truck.driving(distance));
-                } else if (vehicleType.equals("Bus")) {
-                    System.out.println(bus.driving(distance));
-                }
+                System.out.println(vehicleMap.get(vehicleType).driving(distance));
+
                 break;
             case "Refuel":
                 double liters = Double.parseDouble(tokens[2]);
-                if (vehicleType.equals("Car")) {
-                    car.refueling(liters);
-                } else if (vehicleType.equals("Truck")) {
-                    truck.refueling(liters);
-                }else if (vehicleType.equals("Bus")) {
-                    bus.refueling(liters);
-                }
+                vehicleMap.get(vehicleType).refueling(liters);
+
                 break;
                 case "DriveEmpty":
                     double distanceForEmpty = Double.parseDouble(tokens[2]);
-                    bus.drivingEmptyBus(distanceForEmpty);
+                    Bus bus = (Bus) vehicleMap.get(vehicleType);
+                    System.out.println(bus.drivingEmptyBus(distanceForEmpty));
             break;
         }
     }
