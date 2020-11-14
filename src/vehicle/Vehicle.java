@@ -4,10 +4,9 @@ import java.text.DecimalFormat;
 
 public class Vehicle {
     private double fuelQuantity;
-
     private double consumption;
-
     private final double tankCapacity;
+
     public Vehicle(double fuelQuantity, double consumption, double tankCapacity) {
         this.tankCapacity = tankCapacity;
         this.setFuelQuantity(fuelQuantity);
@@ -19,7 +18,7 @@ public class Vehicle {
     }
 
     public double getConsumption() {
-        return consumption;
+        return this.consumption;
     }
 
     public double getFuelQuantity() {
@@ -39,7 +38,7 @@ public class Vehicle {
     }
 
     private void checkForFreeSpace(double newLiters) {
-        if (this.fuelQuantity + newLiters > this.tankCapacity) {
+        if (newLiters > this.tankCapacity) {
             throw new IllegalStateException("Cannot fit fuel in tank");
         }
     }
@@ -51,7 +50,7 @@ public class Vehicle {
             return String.format("%s needs refueling", this.getClass().getSimpleName());
         }
 
-        setFuelQuantity(this.getFuelQuantity() - neededLitersForCurrentDistance);
+        this.fuelQuantity -= neededLitersForCurrentDistance;
         DecimalFormat df = new DecimalFormat("0.##");
         return String.format("%s travelled %s km", this.getClass().getSimpleName(),
                 df.format(distance));
@@ -61,5 +60,9 @@ public class Vehicle {
         validatedForPositiveNumber(liters);
         checkForFreeSpace(liters);
         this.setFuelQuantity(this.getFuelQuantity() + liters);
+    }
+
+    public String toString() {
+        return String.format("%s: %.2f",this.getClass().getSimpleName(), this.getFuelQuantity());
     }
 }

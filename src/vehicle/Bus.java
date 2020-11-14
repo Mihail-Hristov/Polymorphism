@@ -13,9 +13,4 @@ public class Bus extends Vehicle {
         super.setConsumption(getConsumption() + AIR_CONSUMPTION_EXTEND);
     }
 
-
-    @Override
-    public String toString() {
-        return String.format("Bus: %.2f", super.getFuelQuantity());
-    }
 }

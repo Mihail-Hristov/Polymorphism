@@ -8,8 +8,4 @@ public class Car extends Vehicle {
     }
 
 
-    @Override
-    public String toString() {
-        return String.format("Car: %.2f", super.getFuelQuantity());
-    }
 }
