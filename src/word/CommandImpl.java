@@ -41,6 +41,7 @@ public class CommandImpl implements CommandInterface {
         List<Command> commands = new ArrayList<>();
         commands.add(new Command("uppercase", new ToUpperTransform()));
         commands.add(new Command("cut", new CutTransform()));
+        commands.add(new Command("paste", new PasteTransform()));
         return commands;
     }
 }
